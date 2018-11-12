@@ -25,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "mix8872\\user-admin\\": ""
+            "mix8872\\useradmin\\": "src"
         }
     }
 }
