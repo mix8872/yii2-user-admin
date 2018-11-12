@@ -1,0 +1,31 @@
+{
+    "name": "mix8872/yii2-user-admin",
+    "description": "RBAC Auth manager for Yii2 ",
+    "keywords": ["yii", "admin", "auth", "rbac"],
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "support": {
+        "source": "https://github.com/mix8872/yii2-user-admin"
+    },
+    "authors": [
+        {
+            "name": "Misbahul Munir",
+            "email": "misbahuldmunir@gmail.com"
+        },
+		{
+			"name": "Michael Kromskiy",
+			"email": "mix8872@yandex.ru"
+		}
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.4"
+    },
+    "suggest": {
+        "yiisoft/yii2-bootstrap": "Used when using layout 'left-menu', 'right-menu' or 'top-menu'"
+    },
+    "autoload": {
+        "psr-4": {
+            "mix8872\\user-admin\\": ""
+        }
+    }
+}
