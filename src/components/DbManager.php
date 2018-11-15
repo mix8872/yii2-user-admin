@@ -33,9 +33,9 @@ use yii\caching\TagDependency;
  */
 class DbManager extends \yii\rbac\DbManager
 {
-    const PART_ITEMS = 'mdm.admin.items';
-    const PART_CHILDREN = 'mdm.admin.children';
-    const PART_RULES = 'mdm.admin.rules';
+    const PART_ITEMS = 'mix8872.admin.items';
+    const PART_CHILDREN = 'mix8872.admin.children';
+    const PART_RULES = 'mix8872.admin.rules';
 
     /**
      * @var boolean Enable caching

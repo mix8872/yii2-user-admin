@@ -1,14 +1,19 @@
-body {
-    padding-top: 70px;
+.assign-btn-block {
+    margin-top: 230px;
 }
 
-.footer {
-    border-top: 1px solid #ddd;
-    margin-top: 30px;
-    padding: 15px 0 30px;
+.user-img-block {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 50%;
 }
 
-.navbar-brand {
-    padding: 0;
-    margin: 0;
+.user-img-block img {
+    border: 2px solid #edf0f0;
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
 }

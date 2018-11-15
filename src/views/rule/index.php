@@ -9,34 +9,37 @@ use yii\widgets\Pjax;
  * @var yii\data\ActiveDataProvider $dataProvider
  * @var mix8872\useradmin\models\AuthItemSearch $searchModel
  */
-$this->title = Yii::t('rbac-admin', 'Rules');
+$this->title = Yii::t('user-admin', 'Правила');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('user-admin', 'Пользователи'), 'url' => ['user/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="role-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('rbac-admin', 'Create Rule'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php
-    Pjax::begin([
-        'enablePushState'=>false,
-    ]);
-    echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'attribute' => 'name',
-                'label' => Yii::t('rbac-admin', 'Name'),
+<div class="panel col-md-12">
+    <div class="panel-heading">
+        <h2 class="pull-left"><?= $this->title ?></h2>
+        <div class="panel-heading__btn-block">
+            <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-chevron-left']) . ' ' . Yii::t('user-admin', 'Пользователи'), ['user/index'], ['class' => 'btn btn-warning']) ?>
+            <?= Html::a(Html::tag('i', '', ['class' => 'fa fa']) . ' ' . Yii::t('user-admin', 'Маршруты'), ['route/index'], ['class' => 'btn btn-light btn-white']) ?>
+            <?= Html::a(Html::tag('i', '', ['class' => 'fa fa']) . ' ' . Yii::t('user-admin', 'Разрешения'), ['permission/index'], ['class' => 'btn btn-light btn-white']) ?>
+            <?= Html::a(Html::tag('i', '', ['class' => 'fa fa']) . ' ' . Yii::t('user-admin', 'Роли'), ['role/index'], ['class' => 'btn btn-light btn-white']) ?>
+            <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-plus']) . ' ' . Yii::t('user-admin', 'Добавить правило'), ['create'], ['class' => 'btn btn-success']) ?>
+        </div>
+    </div>
+    <div class="panel-body">
+        <?php
+        Pjax::begin();
+        echo GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
+                [
+                    'attribute' => 'name',
+                    'label' => Yii::t('user-admin', 'Name'),
+                ],
+                ['class' => 'yii\grid\ActionColumn',],
             ],
-            ['class' => 'yii\grid\ActionColumn',],
-        ],
-    ]);
-    Pjax::end();
-    ?>
-
+        ]);
+        Pjax::end();
+        ?>
+    </div>
 </div>

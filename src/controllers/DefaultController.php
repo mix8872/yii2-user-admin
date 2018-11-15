@@ -8,7 +8,7 @@ namespace mix8872\useradmin\controllers;
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
  */
-class DefaultController extends \yii\web\Controller
+class DefaultController extends BaseController
 {
 
     /**
@@ -16,6 +16,6 @@ class DefaultController extends \yii\web\Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $this->redirect(['user/index']);
     }
 }

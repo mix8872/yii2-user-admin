@@ -19,9 +19,9 @@ use Exception;
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
  */
-class RouteController extends \yii\web\Controller
+class RouteController extends BaseController
 {
-    const CACHE_TAG = 'mdm.admin.route';
+    const CACHE_TAG = 'mix8872.admin.route';
 
     /**
      * Lists all Route models.

@@ -4,7 +4,6 @@ namespace mix8872\useradmin\controllers;
 
 use Yii;
 use mix8872\useradmin\models\BizRule;
-use yii\web\Controller;
 use mix8872\useradmin\models\searchs\BizRule as BizRuleSearch;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
@@ -16,7 +15,7 @@ use mix8872\useradmin\components\MenuHelper;
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
  */
-class RuleController extends Controller
+class RuleController extends BaseController
 {
 
     /**
@@ -50,18 +49,6 @@ class RuleController extends Controller
     }
 
     /**
-     * Displays a single AuthItem model.
-     * @param  string $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        $model = $this->findModel($id);
-
-        return $this->render('view', ['model' => $model]);
-    }
-
-    /**
      * Creates a new AuthItem model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -72,7 +59,7 @@ class RuleController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             MenuHelper::invalidate();
 
-            return $this->redirect(['view', 'id' => $model->name]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', ['model' => $model,]);
         }
@@ -90,7 +77,7 @@ class RuleController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             MenuHelper::invalidate();
 
-            return $this->redirect(['view', 'id' => $model->name]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', ['model' => $model,]);

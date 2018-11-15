@@ -4,7 +4,6 @@ namespace mix8872\useradmin\controllers;
 
 use mix8872\useradmin\models\AuthItem;
 use mix8872\useradmin\models\searchs\AuthItem as AuthItemSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\rbac\Item;
@@ -17,7 +16,7 @@ use mix8872\useradmin\components\MenuHelper;
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
  */
-class RoleController extends Controller
+class RoleController extends BaseController
 {
 
     /**
@@ -51,18 +50,6 @@ class RoleController extends Controller
     }
 
     /**
-     * Displays a single AuthItem model.
-     * @param  string $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        $model = $this->findModel($id);
-        
-        return $this->render('view', ['model' => $model]);
-    }
-
-    /**
      * Creates a new AuthItem model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -74,7 +61,7 @@ class RoleController extends Controller
         if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
             MenuHelper::invalidate();
 
-            return $this->redirect(['view', 'id' => $model->name]);
+            return $this->redirect(['update', 'id' => $model->name]);
         } else {
             return $this->render('create', ['model' => $model,]);
         }
@@ -92,7 +79,7 @@ class RoleController extends Controller
         if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
             MenuHelper::invalidate();
 
-            return $this->redirect(['view', 'id' => $model->name]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', ['model' => $model,]);

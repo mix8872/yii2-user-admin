@@ -4,7 +4,6 @@ namespace mix8872\useradmin\controllers;
 
 use mix8872\useradmin\models\AuthItem;
 use mix8872\useradmin\models\searchs\AuthItem as AuthItemSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\rbac\Item;
@@ -18,7 +17,7 @@ use yii\web\Response;
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
  */
-class PermissionController extends Controller
+class PermissionController extends BaseController
 {
 
     /**
@@ -52,18 +51,6 @@ class PermissionController extends Controller
     }
 
     /**
-     * Displays a single AuthItem model.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        $model = $this->findModel($id);
-        
-        return $this->render('view', ['model' => $model]);
-    }
-
-    /**
      * Creates a new AuthItem model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -75,7 +62,7 @@ class PermissionController extends Controller
         if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
             MenuHelper::invalidate();
 
-            return $this->redirect(['view', 'id' => $model->name]);
+            return $this->redirect(['update', 'id' => $model->name]);
         } else {
             return $this->render('create', ['model' => $model,]);
         }
@@ -93,7 +80,7 @@ class PermissionController extends Controller
         if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
             MenuHelper::invalidate();
 
-            return $this->redirect(['view', 'id' => $model->name]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', ['model' => $model,]);
@@ -116,8 +103,6 @@ class PermissionController extends Controller
 
     /**
      * Assign or remove items
-     * @param string $id
-     * @param string $action
      * @return array
      */
     public function actionAssign()
@@ -197,9 +182,10 @@ class PermissionController extends Controller
     /**
      * Finds the AuthItem model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param  string        $id
+     * @param  string $id
      * @return AuthItem      the loaded model
      * @throws HttpException if the model cannot be found
+     * @throws NotFoundHttpException
      */
     protected function findModel($id)
     {

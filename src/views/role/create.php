@@ -7,16 +7,11 @@ use yii\helpers\Html;
  * @var mix8872\useradmin\models\AuthItem $model
  */
 
-$this->title = Yii::t('rbac-admin', 'Create Role');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Roles'), 'url' => ['index']];
+$this->title = Yii::t('user-admin', 'Добавление роли');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('user-admin', 'Пользователи'), 'url' => ['user/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('user-admin', 'Роли'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="auth-item-create">
-
-	<h1><?= Html::encode($this->title) ?></h1>
-
-	<?php echo $this->render('_form', [
-        'model' => $model,
-    ]); ?>
-
-</div>
+<?= $this->render('_form', [
+    'model' => $model,
+]); ?>
