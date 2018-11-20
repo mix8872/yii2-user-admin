@@ -137,6 +137,7 @@ class RoleController extends BaseController
             }
         }
         MenuHelper::invalidate();
+        Yii::$app->cache->flush();
         Yii::$app->response->format = 'json';
 
         return[

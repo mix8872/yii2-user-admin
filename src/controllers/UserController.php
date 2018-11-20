@@ -215,6 +215,7 @@ class UserController extends BaseController
                 }
             }
         }
+        Yii::$app->cache->flush();
         Yii::$app->response->format = Response::FORMAT_JSON;
         return [
             'type' => 'S',
