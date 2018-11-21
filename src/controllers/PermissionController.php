@@ -133,7 +133,7 @@ class PermissionController extends BaseController
                 }
             }
         }
-        Yii::$app->cache->flush();
+        Yii::$app->cache->flush('rbac');
         MenuHelper::invalidate();
         Yii::$app->getResponse()->format = Response::FORMAT_JSON;
 
