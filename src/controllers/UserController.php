@@ -2,10 +2,10 @@
 
 namespace mix8872\useradmin\controllers;
 
-use mix8872\admin\models\User;
-use mix8872\admin\models\UserSearch;
-use mix8872\admin\components\rbac\models\Role;
-use mix8872\admin\components\rbac\models\AuthItem;
+use mix8872\useradmin\models\User;
+use mix8872\useradmin\models\searchs\User as UserSearch;
+use mix8872\useradmin\components\rbac\models\Role;
+use mix8872\useradmin\components\rbac\models\AuthItem;
 use mix8872\useradmin\helpers\Translit;
 use yii\base\Model;
 use yii\web\NotFoundHttpException;
