@@ -1,4 +1,5 @@
 <?php
+
 namespace mix8872\useradmin\models;
 
 use mix8872\useradmin\components\rbac\models\Role;
@@ -33,7 +34,12 @@ class User extends UserIdentity
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        $module = Yii::$app->getModule('user-admin');
+        if ($module) {
+            return $module->userTableName;
+        } else {
+            return '{{%user}}';
+        }
     }
 
     /**
@@ -53,7 +59,7 @@ class User extends UserIdentity
             ['password', 'required', 'on' => 'create'],
             // use passwordStrengthRule() method to determine password strength
             $this->passwordStrengthRule(),
-                      
+
             ['username', 'unique', 'message' => 'This username has already been taken.'],
             ['email', 'unique', 'message' => 'This email address has already been taken.'],
         ];
@@ -67,11 +73,11 @@ class User extends UserIdentity
     private function passwordStrengthRule()
     {
         // get setting value for 'Force Strong Password'
-        $fsp = Yii::$app->params['fsp'];
+        $fsp = Yii::$app->params['fsp'] ?? false;
 
         // password strength rule is determined by StrengthValidator 
         // presets are located in: vendor/nenad/yii2-password-strength/presets.php
-        $strong = [['password'], StrengthValidator::className(), 'preset'=>'normal'];
+        $strong = [['password'], StrengthValidator::className(), 'preset' => 'normal'];
 
         // normal yii rule
         $normal = ['password', 'string', 'min' => 6];
@@ -100,14 +106,14 @@ class User extends UserIdentity
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('admin', 'ID'),
-            'username' => Yii::t('admin', 'Имя пользователя'),
-            'password' => Yii::t('admin', 'Пароль'),
-            'email' => Yii::t('admin', 'Email'),
-            'status' => Yii::t('admin', 'Статус'),
-            'created_at' => Yii::t('admin', 'Создан'),
-            'updated_at' => Yii::t('admin', 'Изменён'),
-            'item_name' => Yii::t('admin', 'Роль'),
+            'id' => Yii::t('user-admin', 'ID'),
+            'username' => Yii::t('user-admin', 'Имя пользователя'),
+            'password' => Yii::t('user-admin', 'Пароль'),
+            'email' => Yii::t('user-admin', 'Email'),
+            'status' => Yii::t('user-admin', 'Статус'),
+            'created_at' => Yii::t('user-admin', 'Создан'),
+            'updated_at' => Yii::t('user-admin', 'Изменён'),
+            'item_name' => Yii::t('user-admin', 'Роль'),
         ];
     }
 
@@ -135,8 +141,8 @@ class User extends UserIdentity
     public static function findByUsername($username)
     {
         return static::findOne(['username' => $username, 'status' => User::STATUS_ACTIVE]);
-    }  
-    
+    }
+
     /**
      * Finds user by email.
      *
@@ -146,7 +152,7 @@ class User extends UserIdentity
     public static function findByEmail($email)
     {
         return static::findOne(['email' => $email, 'status' => User::STATUS_ACTIVE]);
-    } 
+    }
 
     /**
      * Finds user by password reset token.
@@ -156,8 +162,7 @@ class User extends UserIdentity
      */
     public static function findByPasswordResetToken($token)
     {
-        if (!static::isPasswordResetTokenValid($token)) 
-        {
+        if (!static::isPasswordResetTokenValid($token)) {
             return null;
         }
 
@@ -197,24 +202,18 @@ class User extends UserIdentity
     {
         // if scenario is 'lwe', we need to check email, otherwise we check username
         $field = ($scenario === 'lwe') ? 'email' : 'username';
-        
-        if ($user = static::findOne([$field => $username]))
-        {
-            if ($user->validatePassword($password))
-            {
+
+        if ($user = static::findOne([$field => $username])) {
+            if ($user->validatePassword($password)) {
                 return $user;
-            }
-            else
-            {
+            } else {
                 return false; // invalid password
-            }            
-        }
-        else
-        {
+            }
+        } else {
             return false; // invalid username|email
         }
     }
-  
+
 //------------------------------------------------------------------------------------------------//
 // HELPERS
 //------------------------------------------------------------------------------------------------//
@@ -227,18 +226,13 @@ class User extends UserIdentity
      */
     public function getStatusName($status = null)
     {
-        $status = (empty($status)) ? $this->status : $status ;
+        $status = (empty($status)) ? $this->status : $status;
 
-        if ($status === self::STATUS_DELETED)
-        {
+        if ($status === self::STATUS_DELETED) {
             return "Deleted";
-        }
-        elseif ($status === self::STATUS_NOT_ACTIVE)
-        {
+        } elseif ($status === self::STATUS_NOT_ACTIVE) {
             return "Inactive";
-        }
-        else
-        {
+        } else {
             return "Active";
         }
     }
@@ -251,9 +245,9 @@ class User extends UserIdentity
     public function getStatusList()
     {
         $statusArray = [
-            self::STATUS_ACTIVE     => 'Active',
+            self::STATUS_ACTIVE => 'Active',
             self::STATUS_NOT_ACTIVE => 'Inactive',
-            self::STATUS_DELETED    => 'Deleted'
+            self::STATUS_DELETED => 'Deleted'
         ];
 
         return $statusArray;
@@ -276,7 +270,7 @@ class User extends UserIdentity
     {
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
-    
+
     /**
      * Removes password reset token.
      */
@@ -287,18 +281,17 @@ class User extends UserIdentity
 
     /**
      * Finds out if password reset token is valid.
-     * 
+     *
      * @param  string $token Password reset token.
      * @return bool
      */
     public static function isPasswordResetTokenValid($token)
     {
-        if (empty($token)) 
-        {
+        if (empty($token)) {
             return false;
         }
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $timestamp = (int)substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }

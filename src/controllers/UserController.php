@@ -46,8 +46,7 @@ class UserController extends BaseController
     {
         parent::init();
         if ($this->userClassName === null) {
-            $this->userClassName = Yii::$app->getUser()->identityClass;
-            $this->userClassName = $this->userClassName ?: 'common\models\User';
+            $this->userClassName = \mix8872\useradmin\models\User::class;
         }
     }
 
@@ -135,7 +134,7 @@ class UserController extends BaseController
             }
 
             // if admin is activating user manually we want to remove account activation token
-            if ($user->status == User::STATUS_ACTIVE && $user->account_activation_token != null) {
+            if ($user->status == User::STATUS_ACTIVE && ($user->hasAttribute('account_activation_token') && $user->account_activation_token != null)) {
                 $user->removeAccountActivationToken();
             }
             if ($user->save()) {

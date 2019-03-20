@@ -1,8 +1,8 @@
 <?php
 namespace mix8872\useradmin\components\rbac\helpers;
 
-use mix8872\admin\models\User;
-use mix8872\admin\components\rbac\models\Role;
+use mix8872\useradmin\models\User;
+use mix8872\useradmin\components\rbac\models\Role;
 use Yii;
 
 /**

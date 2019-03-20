@@ -13,13 +13,6 @@ use yii\helpers\Inflector;
  * 
  * ~~~
  * 'layout' => 'left-menu', // default to null mean use application layout.
- * 'controllerMap' => [
- *     'assignment' => [
- *         'class' => 'mix8872\useradmin\controllers\AssignmentController',
- *         'userClassName' => 'app\models\User',
- *         'idField' => 'id'
- *     ]
- * ],
  * 'menus' => [
  *     'assignment' => [
  *         'label' => 'Grand Access' // change label
@@ -44,6 +37,7 @@ class Module extends \yii\base\Module
     public $defaultRoute = 'assignment';
 
     public $parameters;
+    public $userTableName = 'user';
 
     /**
      * @inheritdoc
@@ -58,7 +52,10 @@ class Module extends \yii\base\Module
                 'basePath' => '@vendor/mix8872/useradmin/src/messages'
             ];
         }
-        if (!$this->parameters['avatarSavePath']) {
+        if (isset($this->parameters['userTableName']) && $this->parameters['userTableName']) {
+            $this->userTableName = $this->parameters['userTableName'];
+        }
+        if (!isset($this->parameters['avatarSavePath']) || $this->parameters['avatarSavePath']) {
             $this->parameters['avatarSavePath'] = '/uploads/avatars/';
         } else {
             $this->parameters['avatarSavePath'] = trim($this->parameters['avatarSavePath'], '/');

@@ -1,7 +1,7 @@
 <?php
 namespace mix8872\useradmin\components\rbac\models;
 
-use common\models\User;
+use mix8872\useradmin\models\User;
 use yii\db\ActiveRecord;
 use Yii;
 
@@ -47,7 +47,7 @@ class Role extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'item_name' => Yii::t('admin', 'Роль'),
+            'item_name' => Yii::t('user-admin', 'Роль'),
         ];
     }
 

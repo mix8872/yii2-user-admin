@@ -16,7 +16,7 @@ class User extends \mix8872\useradmin\models\User
      *
      * @var int
      */
-    private $_pageSize = 11;
+    private $_pageSize = 10;
 
     /**
      * Returns the validation rules for attributes.

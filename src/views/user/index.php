@@ -1,11 +1,11 @@
 <?php
 
-use mix8872\admin\helpers\CssHelper;
+use mix8872\useradmin\helpers\CssHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
-mix8872\admin\assets\MainAsset::register($this);
+mix8872\useradmin\assets\MainAsset::register($this);
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\UserSearch */

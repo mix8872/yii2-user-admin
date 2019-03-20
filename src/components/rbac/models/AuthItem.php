@@ -39,8 +39,8 @@ class AuthItem extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('admin', 'Имя'),
-            'description' => Yii::t('admin', 'Описание'),
+            'name' => Yii::t('user-admin', 'Имя'),
+            'description' => Yii::t('user-admin', 'Описание'),
         ];
     }
 
