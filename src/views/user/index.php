@@ -2,7 +2,7 @@
 
 use mix8872\useradmin\helpers\CssHelper;
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
 mix8872\useradmin\assets\MainAsset::register($this);
@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="panel col-md-12">
     <div class="panel-heading">
-        <?= Html::tag('h2', $this->title, ['class' => 'pull-left']) ?>
-        <div class="panel-heading__btn-block">
+        <?= Html::tag('h2', $this->title, ['class' => 'pull-left float-left']) ?>
+        <div class="form-group float-right pull-right">
             <?= Html::a(Html::tag('i', '', ['class' => 'fa fa']) . ' ' . Yii::t('user-admin', 'Правила'), ['rule/index'], ['class' => 'btn btn-light btn-white']) ?>
             <?= Html::a(Html::tag('i', '', ['class' => 'fa fa']) . ' ' . Yii::t('user-admin', 'Маршруты'), ['route/index'], ['class' => 'btn btn-light btn-white']) ?>
             <?= Html::a(Html::tag('i', '', ['class' => 'fa fa']) . ' ' . Yii::t('user-admin', 'Разрешения'), ['permission/index'], ['class' => 'btn btn-light btn-white']) ?>
@@ -59,18 +59,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 ],
                 // buttons
-                ['class' => 'yii\grid\ActionColumn',
+                ['class' => '\kartik\grid\ActionColumn',
                     'header' => Yii::t('user-admin', 'Действия'),
                     'template' => '{update} {delete}',
                     'buttons' => [
                         'update' => function ($url, $model, $key) {
                             return Html::a('', $url, ['title' => Yii::t('user-admin', 'Редактировать пользователя'),
-                                'class' => 'glyphicon glyphicon-pencil']);
+                                'class' => 'fa fa-pencil-alt']);
                         },
                         'delete' => function ($url, $model, $key) {
                             return Html::a('', $url,
                                 ['title' => 'Delete user',
-                                    'class' => 'glyphicon glyphicon-trash',
+                                    'class' => 'fa fa-trash-alt',
                                     'data' => [
                                         'confirm' => Yii::t('user-admin', 'Are you sure you want to delete this user?'),
                                         'method' => 'post']

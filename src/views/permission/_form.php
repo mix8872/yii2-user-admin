@@ -14,7 +14,7 @@ use mix8872\useradmin\assets\AutocompleteAsset;
 <?php $form = ActiveForm::begin(); ?>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <?= Html::tag('h2', Html::encode($this->title), ['class' => 'pull-left']) ?>
+            <?= Html::tag('h2', Html::encode($this->title), ['class' => 'pull-left float-left']) ?>
             <div class="panel-heading__btn-block">
                 <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-chevron-left']) . ' ' . Yii::t('user-admin', 'Назад'), (Yii::$app->request->referrer ?? ['index']), ['class' => 'btn btn-warning']) ?>
                 <?php if (!$model->isNewRecord): ?>
@@ -50,7 +50,7 @@ $this->registerJs("$('#rule-name').autocomplete($options);");
 <?php if (!$model->isNewRecord): ?>
     <div class="panel">
         <div class="panel-heading">
-            <?= Html::tag('h3', Yii::t('user-admin', 'Правила'), ['class' => 'pull-left']) ?>
+            <?= Html::tag('h3', Yii::t('user-admin', 'Правила'), ['class' => 'pull-left float-left']) ?>
         </div>
         <div class="panel-body">
             <div class="row">

@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <?= Html::tag('h2', Html::encode($this->title), ['class' => 'pull-left']) ?>
+            <?= Html::tag('h2', Html::encode($this->title), ['class' => 'pull-left float-left']) ?>
             <div class="panel-heading__btn-block">
                 <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-chevron-left']) . ' ' . Yii::t('user-admin', 'Пользователи'), ['user/index'], ['class' => 'btn btn-warning']) ?>
                 <?= Html::a(Html::tag('i', '', ['class' => 'fa fa']) . ' ' . Yii::t('user-admin', 'Правила'), ['rule/index'], ['class' => 'btn btn-light btn-white']) ?>
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-5">
-                    <?= Yii::t('user-admin', 'Доступные') ?> <a href="#" id="btn-refresh"><span class="glyphicon glyphicon-refresh"></span></a> :
+                    <?= Yii::t('user-admin', 'Доступные') ?> <a href="#" id="btn-refresh"><span class="fa fa-refresh"></span></a> :
                     <input id="search-avaliable" class="form-control">
                     <select id="list-avaliable" class="form-control" multiple size="20" style="width: 100%">
                     </select>

@@ -11,15 +11,15 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 /* @var $role common\rbac\models\Role; */
 ?>
+<?php $form = ActiveForm::begin(['id' => 'form-user', 'options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="row">
-        <?php $form = ActiveForm::begin(['id' => 'form-user', 'options' => ['enctype' => 'multipart/form-data']]); ?>
         <div class="col-md-12">
-            <?= Html::tag('h2', Html::encode($title), ['class' => 'pull-left']) ?>
-            <div class="panel-heading__btn-block">
+            <?= Html::tag('h2', Html::encode($title), ['class' => 'pull-left float-left']) ?>
+            <div class="form-group float-right pull-right">
                 <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-chevron-left']) . ' ' . Yii::t('user-admin', 'Назад'), (Yii::$app->request->referrer ?? ['index']), ['class' => 'btn btn-warning']) ?>
                 <?php if (!$user->isNewRecord): ?>
-                    <?= Html::submitButton(Html::tag('i', '', ['class' => 'fa fa-floppy-o']) . ' ' . Yii::t('user-admin', 'Обновить'), ['class' => 'btn btn-primary']) ?>
-                    <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-remove']) . ' ' . Yii::t('user-admin', 'Удалить'), ['delete', 'id' => $user->id], ['class' => 'btn btn-danger', 'data' => [
+                    <?= Html::submitButton(Html::tag('i', '', ['class' => 'fa fa-save']) . ' ' . Yii::t('user-admin', 'Обновить'), ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-trash']) . ' ' . Yii::t('user-admin', 'Удалить'), ['delete', 'id' => $user->id], ['class' => 'btn btn-danger', 'data' => [
                         'confirm' => 'Вы действительно хотите удалить пользователя?',
                         'method' => 'post'
                     ]]) ?>
@@ -28,27 +28,29 @@ use yii\widgets\ActiveForm;
                 <?php endif; ?>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <?php if ($user->hasAttribute('img')): ?>
-                        <div class="user-img-block form-group">
-                            <img src="<?= $user->img ? $user->img : Yii::getAlias('@web/img/avatar.jpg') ?>" alt="">
-                        </div>
+        <?php if (!$user->isNewRecord) : ?>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <?php if ($user->hasAttribute('img')): ?>
+                            <div class="user-img-block form-group">
+                                <img src="<?= $user->img ? $user->img : Yii::getAlias('@web/img/avatar.jpg') ?>" alt="">
+                            </div>
+                            <div class="form-group">
+                                <?= Html::fileInput('user-img', null, ['class' => 'avatar-input', 'accept' => '.jpg, .jpeg, .png, .bmp', 'title' => ($user->img ? Yii::t('user-admin', 'Заменить') : Yii::t('user-admin', 'Добавить'))]) ?>
+                            </div>
+                        <?php endif; ?>
                         <div class="form-group">
-                            <?= Html::fileInput('user-img', null, ['class' => 'avatar-input', 'accept' => '.jpg, .jpeg, .png, .bmp', 'title' => ($user->img ? Yii::t('user-admin', 'Заменить') : Yii::t('user-admin', 'Добавить'))]) ?>
+                            <h4><?= $user->display_name ?? $user->username ?></h4>
+                            <p class="text-muted font-13">
+                                <strong>Email</strong>
+                                <span class="m-l-15"><a href="mailto:<?= $user->email ?>"><?= $user->email ?></a></span>
+                            </p>
                         </div>
-                    <?php endif; ?>
-                    <div class="form-group">
-                        <h4><?= $user->display_name ?? $user->username ?></h4>
-                        <p class="text-muted font-13">
-                            <strong>Email</strong>
-                            <span class="m-l-15"><a href="mailto:<?= $user->email ?>"><?= $user->email ?></a></span>
-                        </p>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php endif; ?>
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -72,8 +74,8 @@ use yii\widgets\ActiveForm;
                 </div>
             </div>
         </div>
-        <?php ActiveForm::end(); ?>
     </div>
+<?php ActiveForm::end(); ?>
 <?php if (!$user->isNewRecord): ?>
     <div class="row">
         <div class="col-md-12">

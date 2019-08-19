@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
 /**
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="panel">
     <div class="panel-heading">
-        <h2 class="pull-left"><?= $this->title ?></h2>
+        <h2 class="pull-left float-left"><?= $this->title ?></h2>
         <div class="panel-heading__btn-block">
             <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-chevron-left']) . ' ' . Yii::t('user-admin', 'Пользователи'), ['user/index'], ['class' => 'btn btn-warning']) ?>
             <?= Html::a(Html::tag('i', '', ['class' => 'fa fa']) . ' ' . Yii::t('user-admin', 'Правила'), ['rule/index'], ['class' => 'btn btn-light btn-white']) ?>
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => Yii::t('user-admin', 'Description'),
                 ],
                 [
-                    'class' => 'yii\grid\ActionColumn',
+                    'class' => '\kartik\grid\ActionColumn',
                     'template' => '{update} {delete}'
                 ],
             ],
