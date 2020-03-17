@@ -305,7 +305,7 @@ class UserController extends BaseController
     private function findModel($id)
     {
         $class = $this->userClassName;
-        if (($model = $class::findIdentity($id)) !== null) {
+        if (($model = $class::findone($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
