@@ -1,4 +1,5 @@
 <?php
+namespace mix8872\useradmin\migrations;
 
 use yii\db\Migration;
 
