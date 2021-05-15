@@ -4,9 +4,9 @@ namespace mix8872\useradmin\migrations;
 use yii\db\Migration;
 
 /**
- * Class m180524_053921_add_readonly_field_to_config_table
+ * Class 131118_135758_add_img_display_name_user_fields
  */
-class m180524_053921_add_readonly_field_to_config_table extends Migration
+class 131118_135758_add_img_display_name_user_fields extends Migration
 {
     /**
      * {@inheritdoc}
