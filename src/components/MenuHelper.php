@@ -41,7 +41,7 @@ use mix8872\useradmin\models\Menu;
  */
 class MenuHelper
 {
-    const CACHE_TAG = 'mix8872.admin.menu';
+    const CACHE_TAG = 'mix8872.useradmin.menu';
 
     /**
      * Use to get assigned menu of user.

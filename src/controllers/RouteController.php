@@ -21,7 +21,7 @@ use Exception;
  */
 class RouteController extends BaseController
 {
-    const CACHE_TAG = 'mix8872.admin.route';
+    const CACHE_TAG = 'mix8872.useradmin.route';
 
     /**
      * Lists all Route models.
